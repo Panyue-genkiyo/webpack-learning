@@ -1,3 +1,14 @@
 .content{
-    color: red
+    /*利用postcss-preset-env将下面颜色属性转换为更多浏览器可以识别的属性值，例如rgba*/
+    color: #12345678;
+    transition: .5s;
+}
+
+.content:hover{
+    color: deepskyblue;
+}
+
+:fullscreen{
+    /*注意fullscreen这个属性是需要加上浏览器前缀的，使用postcss处理*/
+
 }
