@@ -16,7 +16,23 @@ module.exports = {
                     //注意webpack默认是从下往上(写在一排就是从右往左处理loader的)处理loader (从后往前)
                     //注意编写顺序
                     'style-loader', //简写只有一个loader的时候(没有其他的选项需要处理时)是可以直接传递字符串的
-                    'css-loader'
+                    'css-loader',
+                    "postcss-loader"
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         postcssOptions:  {
+                    //             //依赖的插件
+                    //             plugins: [
+                    //                 //浏览器前缀
+                    //                 // require('autoprefixer'),
+                    //                 //postcss-preset-env已经包含了autoprefixer的功能了
+                    //                 // require('postcss-preset-env')
+                    //                 "postcss-preset-env", //简写
+                    //             ]
+                    //         }
+                    //     }
+                    // }
                 ]  //use-entry
             },
             {
@@ -25,7 +41,8 @@ module.exports = {
                     //注意顺序 处理less文件的loader less->css->document中的style标签
                     'style-loader',
                     'css-loader',
-                    'less-loader'
+                    "postcss-loader",
+                    'less-loader',
                 ]
             }
         ]
