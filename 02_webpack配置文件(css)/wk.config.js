@@ -16,7 +16,13 @@ module.exports = {
                     //注意webpack默认是从下往上(写在一排就是从右往左处理loader的)处理loader (从后往前)
                     //注意编写顺序
                     'style-loader', //简写只有一个loader的时候(没有其他的选项需要处理时)是可以直接传递字符串的
-                    'css-loader',
+                    // 'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1, //设置css-loader的importLoaders属性为1，表示css-loader处理完后某个css文件之后如果这个css文件里还有@import,则还会采用postcss-loader继续处理该css
+                        }
+                    },
                     "postcss-loader"
                     // {
                     //     loader: 'postcss-loader',
@@ -40,7 +46,12 @@ module.exports = {
                 use:[
                     //注意顺序 处理less文件的loader less->css->document中的style标签
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader:'css-loader',
+                        options:{
+                            importLoaders:2, //css-loader处理之前，还需要处理less文件中的@import
+                        }
+                    },
                     "postcss-loader",
                     'less-loader',
                 ]
