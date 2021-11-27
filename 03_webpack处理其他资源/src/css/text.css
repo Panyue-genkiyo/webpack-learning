@@ -1,0 +1,4 @@
+:fullscreen{
+    /*注意fullscreen这个属性是需要加上浏览器前缀的，使用postcss处理*/
+
+}

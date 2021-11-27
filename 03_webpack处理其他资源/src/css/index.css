@@ -1,0 +1,17 @@
+@import "./text.css";
+
+.content{
+    /*利用postcss-preset-env将下面颜色属性转换为更多浏览器可以识别的属性值，例如rgba*/
+    color: #12345678;
+    transition: .5s;
+}
+
+.content:hover{
+    color: deepskyblue;
+}
+
+.bg-image{
+    background-image: url(../img/shiori.jpg);
+    background-size: contain;
+    display: inline-block;
+}
