@@ -1,0 +1,115 @@
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { DefinePlugin } = require("webpack"); //内置插件
+const CopyPlugin = require('copy-webpack-plugin');
+//common js方式导出(webpack的配置文件)
+module.exports = {
+    entry: './src/main.js', //入口文件
+    output: {
+        filename: "js/bundle.js", //打包后的文件名
+        path: path.resolve(__dirname, './build'), //__dirname:当前文件所在目录的绝对路径 注意这里一定要使用绝对路径
+    },
+    module:{
+        rules: [
+            {
+                test:/\.css$/i, // '正则表达式匹配资源'
+                // loader: 'css-loader'
+                use:[
+                    // { loader: 'css-loader' }
+                    //注意webpack默认是从下往上(写在一排就是从右往左处理loader的)处理loader (从后往前)
+                    //注意编写顺序
+                    'style-loader', //简写只有一个loader的时候(没有其他的选项需要处理时)是可以直接传递字符串的
+                    // 'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1, //设置css-loader的importLoaders属性为1，表示css-loader处理完后某个css文件之后如果这个css文件里还有@import,则还会采用postcss-loader继续处理该css
+                        }
+                    },
+                    "postcss-loader"
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         postcssOptions:  {
+                    //             //依赖的插件
+                    //             plugins: [
+                    //                 //浏览器前缀
+                    //                 // require('autoprefixer'),
+                    //                 //postcss-preset-env已经包含了autoprefixer的功能了
+                    //                 // require('postcss-preset-env')
+                    //                 "postcss-preset-env", //简写
+                    //             ]
+                    //         }
+                    //     }
+                    // }
+                ]  //use-entry
+            },
+            {
+                test: /\.less$/,
+                use:[
+                    //注意顺序 处理less文件的loader less->css->document中的style标签
+                    'style-loader',
+                    {
+                        loader:'css-loader',
+                        options:{
+                            importLoaders:2, //css-loader处理之前，还需要处理less文件中的@import
+                        }
+                    },
+                    "postcss-loader",
+                    'less-loader',
+                ]
+            },
+            {
+                test:/\.(png|jpe?g|gif|svg)$/i, //处理图片的规则
+                //type: 'asset/resource', //实现了file-loader的效果
+                //type:'asset/inline', //实现了url-loader的效果 将图片打包压为base64的格式嵌入到代码中
+                type:'asset',
+                //生成的图片资源的文件夹以及打包后图片的文件名
+                generator: {
+                    filename: 'img/[name].[hash:6][ext]',
+                },
+                parser:{
+                    dataUrlCondition:{
+                        maxSize: 100 * 1024, //小于100k的图片base64压倒之后的源代码中
+                    }
+                }
+            },
+            {
+                test: /\.ttf|woff2?$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: "font/[name].[hash:6][ext]"
+                }
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(), //自动清除上一次的打包结果 plugin是一个又一个类
+        new HtmlWebpackPlugin({
+            template: './public/index.html', //模板文件
+            filename: 'index.html', //打包后的文件名
+
+            // title:'test webpack',
+            // minify: {
+            //     removeAttributeQuotes: true, //去掉属性的双引号
+            //     collapseWhitespace: true, //去掉空格
+            //     removeComments: true, //去掉注释
+            // }
+        }),
+        new DefinePlugin({
+            BASE_URL: "'./'"
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'public', //默认打包到你上面定义的output的位置，也就是build
+                    globOptions:{
+                        ignore: ['**/index.html', '**/.DS_Store'], //要忽略
+                    },
+                    noErrorOnMissing: true
+                }
+            ]
+        })
+    ]
+}
