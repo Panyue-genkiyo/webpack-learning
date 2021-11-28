@@ -1,0 +1,32 @@
+{
+  "name": "learning-webpack-for-the-first-time",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config wk.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "browserslist": "^4.18.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "postcss": "^8.4.1",
+    "postcss-cli": "^9.0.2",
+    "postcss-loader": "^6.2.0",
+    "postcss-preset-env": "^7.0.1",
+    "style-loader": "^3.3.1"
+  }
+}
