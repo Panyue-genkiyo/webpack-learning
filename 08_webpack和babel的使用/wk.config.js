@@ -39,9 +39,15 @@ module.exports = {
                     // }
                 }
             },
+            // {
+            //     test:/\.ts$/,
+            //     //本质上依赖typescript(typescript compiler)
+            //     use: 'ts-loader',
+            // }
             {
                 test:/\.ts$/,
-                use: 'ts-loader',
+                exclude: /node_modules/,
+                use: "babel-loader",
             }
         ]
     },
