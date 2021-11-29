@@ -5,6 +5,6 @@ function h(name:string): string{
     return `hello ${name}`;
 }
 
-console.log(h('panyue'));
+console.log(h("py"));
 
 export {};
