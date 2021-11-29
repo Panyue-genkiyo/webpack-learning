@@ -9,7 +9,8 @@ module.exports = {
             useBuiltIns: 'usage', //false, usage, entry
             corejs: 3, //安装的corejs大版本为3
         }],
-        ["@babel/preset-react"]
+        ["@babel/preset-react"],
+        ["@babel/preset-typescript"] //typescript的预设
     ],
     // plugins:[
     //     //     ['@babel/plugin-transform-runtime', {
