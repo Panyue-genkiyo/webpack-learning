@@ -13,7 +13,7 @@ module.exports = {
     },
     //为webpack-dev-server提供配置项
     devServer:{
-      hot:true, //hmr热更新 不在采用live reloading
+      hot:true, //hmr热更新 不再采用live reloading
     },
     module:{
       rules:[
