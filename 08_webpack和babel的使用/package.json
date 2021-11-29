@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config wk.config.js"
+    "build": "npm run tc && webpack --config wk.config.js",
+    "tc":"tsc --noEmit",
+    "tc-watch": "tsc --noEmit --watch"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +27,7 @@
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "browserslist": "^4.18.1",
