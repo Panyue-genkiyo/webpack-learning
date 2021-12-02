@@ -81,6 +81,12 @@ const commonConfig = {
            priority: -20
          }
        }
+     },
+     //true === 'multiple'
+     //single
+     // runtimeChunk: 'single'
+     runtimeChunk: {
+        name: (entrypoint) => `runtime~${entrypoint.name}`,
      }
   },
   module:{

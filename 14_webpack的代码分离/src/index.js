@@ -4,12 +4,17 @@ import './bar01';
 console.log('hello index.js');
 console.log(dayjs(), 'index.js');
 
-//异步导入的代码 webpack都会进行代码分离
-//magic comment指定异步导入的chunks的名称
-import(/* webpackChunkName:"foo" */'./foo').then(res => {
-  console.log(res);
+const button = document.createElement('button');
+button.innerHTML = 'load the element';
+button.addEventListener('click', function(e){
+    //prefetch(提前获取某个文件) magic-comments 空闲时间加载优化下一次的访问
+    //preload(预加载) 父chunks页面加载所需的重要文件例如js文件css文件字体等等，提高下载权重，优化打开速度 用于当下使用
+    import(
+      /* webpackChunkName: 'element' */
+      /* webpackPreload: true */
+      /* webpackPrefetch: true*/
+      './component').then(({default: el}) => {
+        document.body.append(el);
+    });
 });
-
-import(/* webpackChunkName:"foo02" */'./foo02').then(res => {
-  console.log(res);
-})
+document.body.append(button);
