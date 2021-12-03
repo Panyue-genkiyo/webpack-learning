@@ -1,0 +1,21 @@
+body{
+    background: blue;
+}
+
+html{
+   font-size: 20px;
+}
+
+/*title我不会用到，则我希望webpack把这个代码treeShaking掉*/
+.title4{
+    color: skyblue;
+}
+
+h2{
+    font-size: 20px;
+}
+
+.ab{
+    width: 200px;
+    height: 200px;
+}
