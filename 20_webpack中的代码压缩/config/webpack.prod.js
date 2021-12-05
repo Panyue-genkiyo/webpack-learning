@@ -45,7 +45,7 @@ module.exports = {
     ]
   },
   //提取公共代码
-   plugins:[
+  plugins:[
      new CleanWebpackPlugin({}),
      //生产环境下拆包css文件
      new MiniCssExtractPlugin({
